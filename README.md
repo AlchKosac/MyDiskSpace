@@ -1,6 +1,6 @@
 # MyDiskSpace
 
-Domácí obdoba [TreeSize](https://www.jam-software.com/treesize) postavená na .NET 10 a Avalonia UI.
+Disk space analyzer pro Windows, Linux i macOS postavený na .NET 10 a Avalonia UI.
 Jedna codebase pro Windows, Linux i macOS.
 
 Tento repozitář obsahuje **oficiální buildy aplikace**. Zdrojový kód je v soukromém repozitáři.
@@ -9,11 +9,16 @@ Tento repozitář obsahuje **oficiální buildy aplikace**. Zdrojový kód je v 
 
 Nejnovější verze je v sekci [Releases](../../releases):
 
-| Platforma | Soubor |
-|---|---|
-| Windows x64 | `MyDiskSpace-1.0.0-win-x64.zip` |
+| Platforma | Soubor | Poznámka |
+|---|---|---|
+| Windows x64 | `MyDiskSpace-1.0.0-win-x64.zip` | rozbal a spusť `MyDiskSpace.exe` |
+| Linux x64 | `MyDiskSpace-1.0.0-linux-x64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
+| macOS Apple Silicon | `MyDiskSpace-1.0.0-osx-arm64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
+| macOS Intel | `MyDiskSpace-1.0.0-osx-x64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
 
-Build je self-contained single-file – nepotřebuje nainstalovaný .NET, stačí rozbalit a spustit `MyDiskSpace.exe`.
+Všechny buildy jsou self-contained – nepotřebují nainstalovaný .NET.
+
+Na macOS může Gatekeeper při prvním spuštění hlídat nepodepsanou aplikaci; stačí povolit spuštění v *System Settings → Privacy & Security*.
 
 ## Co to umí
 
@@ -33,16 +38,26 @@ Build je self-contained single-file – nepotřebuje nainstalovaný .NET, stač�
 
 ## Spuštění
 
-Rozbal ZIP a spusť `MyDiskSpace.exe`. Volitelně lze předat cestu ke skenu:
+Windows: rozbal ZIP a spusť `MyDiskSpace.exe`.
 
-```powershell
-.\MyDiskSpace.exe "C:\Users"
+Linux / macOS:
+
+```bash
+tar -xzf MyDiskSpace-1.0.0-linux-x64.tar.gz
+./MyDiskSpace/MyDiskSpace
+```
+
+Volitelně lze předat cestu ke skenu:
+
+```bash
+./MyDiskSpace/MyDiskSpace "/home"
 ```
 
 ## Požadavky
 
-- Windows 10/11 x64 (build je self-contained)
-- Linux a macOS buildy přidám později
+- Windows 10/11 x64
+- Linux x64 s X11 (běžná desktopová distribuce)
+- macOS 12+ (Apple Silicon i Intel)
 
 ## Co (zatím) není
 
