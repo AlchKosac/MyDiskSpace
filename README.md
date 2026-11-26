@@ -11,10 +11,10 @@ Nejnovější verze je v sekci [Releases](../../releases):
 
 | Platforma | Soubor | Poznámka |
 |---|---|---|
-| Windows x64 | `MyDiskSpace-1.1.0-win-x64.zip` | rozbal a spusť `MyDiskSpace.exe` |
-| Linux x64 | `MyDiskSpace-1.1.0-linux-x64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
-| macOS Apple Silicon | `MyDiskSpace-1.1.0-osx-arm64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
-| macOS Intel | `MyDiskSpace-1.1.0-osx-x64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
+| Windows x64 | `MyDiskSpace-1.2.0-win-x64.zip` | rozbal a spusť `MyDiskSpace.exe` |
+| Linux x64 | `MyDiskSpace-1.2.0-linux-x64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
+| macOS Apple Silicon | `MyDiskSpace-1.2.0-osx-arm64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
+| macOS Intel | `MyDiskSpace-1.2.0-osx-x64.tar.gz` | rozbal a spusť `MyDiskSpace/MyDiskSpace` |
 
 Všechny buildy jsou self-contained – nepotřebují nainstalovaný .NET.
 
@@ -26,12 +26,13 @@ Na macOS může Gatekeeper při prvním spuštění hlídat nepodepsanou aplikac
 - **Strom složek** seřazený podle velikosti, s podílem z rodiče a počtem souborů.
 - **Koláčový graf** a **treemap** s drill-down dvojklikem.
 - **Tabulka souborů** – velikost, velikost na disku, datum změny; otevření, zobrazení v průzkumníku, kopírování cesty.
-- **Mazání a přesun** – soubory i celé složky, do koše (Windows) nebo trvale, přesun do jiné složky.
+- **Mazání a přesun** – soubory i celé složky, do koše (Windows) nebo trvale, přesun do jiné složky; upozornění, když položka patří nainstalované aplikaci.
 - **Export** – CSV a samostatný HTML report.
 - **Snapshoty skenu** – uložení a načtení `.mdsnap` bez opětovného skenování.
 - **Porovnání skenů** – přidané, odebrané a změněné složky proti uloženému snapshotu.
 - **500 největších souborů** v celém stromu.
-- **Hledání duplikátů** – velikost → hash prvních 16 KB → plný SHA-256.
+- **Hledání duplikátů** – velikost → hash prvních 16 KB → plný SHA-256, s tlačítkem `Ponechat jednu` pro hromadné smazání ostatních kopií.
+- **Automatické aktualizace** – kontrola nové verze při startu nebo ručně z nastavení; na Windows se aktualizace stáhne a nainstaluje sama.
 - **Lokalizace** – angličtina a čeština.
 - **Vzhled** – světlý, tmavý, nebo podle systému.
 - **Zástupci** – volitelně na plochu a do nabídky Start (Windows).
@@ -43,7 +44,7 @@ Windows: rozbal ZIP a spusť `MyDiskSpace.exe`.
 Linux / macOS:
 
 ```bash
-tar -xzf MyDiskSpace-1.1.0-linux-x64.tar.gz
+tar -xzf MyDiskSpace-1.2.0-linux-x64.tar.gz
 ./MyDiskSpace/MyDiskSpace
 ```
 
