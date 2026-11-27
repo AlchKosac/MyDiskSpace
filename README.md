@@ -18,7 +18,7 @@ Jedna codebase pro Windows, Linux i macOS.
 - **Snapshoty skenu** – uložení výsledku skenu do komprimovaného `.mdsnap` souboru a jeho pozdější načtení bez opětovného procházení disku.
 - **Porovnání více snapshotů** – vyber jeden nebo více uložených snapshotů; aktuální sken se přidá jako poslední sloupec. Tabulka ukazuje velikost každé složky ve všech verzích vedle sebe a změnu od nejstarší po nejnovější, seřazenou podle největšího rozdílu. Složka, která v některé verzi chybí, se označí jako `—`.
 - **Export porovnání do PDF** – tabulka porovnání jako vícestránkové A4 na šířku (QuestPDF).
-- **Hardware** – karta s informacemi o disku, na kterém leží naskenovaná data: model, výrobce, typ (HDD / SSD / NVMe), připojení, kapacita, sériové číslo, firmware, přípojný bod. Pokud je dostupné, zobrazí se také stav SMART, teplota, opotřebení SSD, doba provozu, počet zapnutí, chyby a SMART atributy. Varování se zobrazí u opotřebení nad 80 %, teploty nad 55 °C, přemapovaných, čekajících nebo neopravitelných sektorů, chyb CRC a nízké volné rezervy NVMe.
+- **Hardware** – karta s informacemi o disku, na kterém leží naskenovaná data: model, výrobce, typ (HDD / SSD / NVMe), připojení, kapacita, sériové číslo, firmware, přípojný bod. Detailní údaje čte přibalený `smartctl` (smartmontools 7.5, Windows). U NVMe disků (M.2) se čte celý SMART/Health log bez administrátorských práv: teplota, opotřebení, zapsaná a přečtená data, rezerva, chyby médií, nebezpečná vypnutí, chybový log a výrobce řadiče. U SATA disků jsou bez práv správce jen identita a stav, SMART atributy vyžadují spuštění jako správce. Aplikace si ukládá jedno měření SMART denně (`%APPDATA%\MyDiskSpace\smart-history`) a z něj počítá trend: zápis za den, nárůst opotřebení za rok, spotřebovanou rezervu a to, jestli rostou chybové čítače. Odhad zbývající životnosti je dvojí: podle deklarované výdrže výrobce v TBW (tabulka `EnduranceCatalog`, zatím jen ověřené modely Samsung 990 EVO Plus, 970 PRO a 970 EVO) a podle nárůstu opotřebení. Odhady se zobrazí po dvou dnech měření a jsou orientační. Aktualizace smartctl: `tools/update-smartctl.ps1`; `release.ps1` odmítne balíček, jehož `smartctl.exe` nesedí s `SHA256SUMS`. Varování se zobrazí u opotřebení nad 80 %, teploty nad 55 °C, přemapovaných, čekajících nebo neopravitelných sektorů, chyb CRC a nízké volné rezervy NVMe.
 - **500 největších souborů** v celém stromu (min-heap, žádné materializování všech cest).
 - **Hledání duplikátů** ve třech fázích: seskupení podle velikosti → hash prvních 16 KB → plný SHA-256. Počítá se z už naskenovaného stromu, takže se znovu nečte celý disk. U každé skupiny lze rádiovým tlačítkem vybrat, kterou kopii zachovat, tlačítkem „Ponechat nejnovější“ vybrat tu s nejnovějším datem změny, a ostatní buď smazat, nebo přesunout do jiné složky. Filtr nad seznamem zobrazí jen skupiny, jejichž kopie leží v dané složce. Kliknutím na kopii se v pravém panelu zobrazí náhled obsahu (text nebo obrázek) a lze ji otevřít či zobrazit v průzkumníku.
 - **Lokalizace** – angličtina (default) a čeština, další jazyk = jeden JSON soubor.
@@ -144,15 +144,15 @@ Každý balíček má vedle sebe `.sig` s RSA/SHA-256 podpisem. Veřejný klíč
 Vydání nové verze:
 
 ```bash
-powershell -File tools/release.ps1 -Version 1.5.0
-gh release create v1.5.0 --repo AlchKosac/MyDiskSpace --notes-file notes.md artifacts/1.5.0/*
+powershell -File tools/release.ps1 -Version 1.6.0
+gh release create v1.6.0 --repo AlchKosac/MyDiskSpace --notes-file notes.md artifacts/1.6.0/*
 ```
 
 ## Co (zatím) není
 
 - Síťové share a cloudová úložiště (SMB, OneDrive, Google Drive…)
 - Přesná velikost na disku na Unixu (řešeno aproximací na cluster)
-- Hardware na Linuxu a macOS bez `smartctl` ukazuje jen základní údaje (model, typ, připojení, kapacitu); SMART atributy vyžadují nainstalovaný smartmontools
+- Hardware na Linuxu a macOS bez `smartctl` ukazuje jen základní údaje (model, typ, připojení, kapacitu); detailní SMART vyžaduje nainstalovaný smartmontools (na Windows je přibalený)
 - Odinstalace na Linuxu vyžaduje `pkexec` (grafické potvrzení hesla), na macOS se `.app` přesune do koše a balíčky z Homebrew se odinstalují ručně
 
 Tyhle věci se dají doplnit nad existující Core vrstvu bez zásahu do UI.
