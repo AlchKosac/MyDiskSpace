@@ -144,8 +144,8 @@ Každý balíček má vedle sebe `.sig` s RSA/SHA-256 podpisem. Veřejný klíč
 Vydání nové verze:
 
 ```bash
-powershell -File tools/release.ps1 -Version 1.8.0
-gh release create v1.8.0 --repo AlchKosac/MyDiskSpace --notes-file notes.md artifacts/1.8.0/*
+powershell -File tools/release.ps1 -Version 1.8.1
+gh release create v1.8.1 --repo AlchKosac/MyDiskSpace --notes-file notes.md artifacts/1.8.1/*
 ```
 
 ## Co (zatím) není
